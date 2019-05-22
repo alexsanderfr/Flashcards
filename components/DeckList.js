@@ -33,8 +33,8 @@ class DeckList extends Component {
             <View>
                 <Text>Deck List</Text>
                 {decks.map((deck) => (
-                    <View key={deck.title}>
-                        <Text>{deck.title}</Text>
+                    <View>
+                        <Text>Deck</Text>
                     </View>
                 ))}
             </View>
