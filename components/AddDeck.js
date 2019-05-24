@@ -12,12 +12,8 @@ class AddDeck extends Component {
         const { dispatch } = this.props
 
         saveDeckTitle(text)
-            .then(getDecks().then((results) => results[text])
-                .then((deck) => {
-                    console.log(deck)
-                    dispatch(saveDeckTitleAction(deck.title))
-                })
-                .then(() => this.setState(() => ({ text: '' }))))
+            .then(getDeck(text).then((deck) => dispatch(saveDeckTitleAction(deck.title))))
+            .then(() => this.setState(() => ({ text: '' })))
     }
 
     render() {

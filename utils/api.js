@@ -3,7 +3,7 @@ import { DECK_STORAGE_KEY, formatDeck } from './_deck'
 
 export function getDeck(id) {
     return AsyncStorage.getItem(DECK_STORAGE_KEY)
-        .then((results) => JSON.parse(results)[id])
+        .then((results) => results[id])
 }
 
 export function getDecks() {
