@@ -9,7 +9,7 @@ function setDummyData() {
     return dummyData
 }
 
-export function formatDeck(results) {
+export function formatDecks(results) {
     return results === null
         ? setDummyData()
         : JSON.parse(results)

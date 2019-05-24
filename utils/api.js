@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { DECK_STORAGE_KEY, formatDeck } from './_deck'
+import { DECK_STORAGE_KEY, formatDecks} from './_deck'
 
 export function getDeck(id) {
     return AsyncStorage.getItem(DECK_STORAGE_KEY)
@@ -7,7 +7,7 @@ export function getDeck(id) {
 }
 
 export function getDecks() {
-    return AsyncStorage.getItem(DECK_STORAGE_KEY).then(formatDeck)
+    return AsyncStorage.getItem(DECK_STORAGE_KEY).then(formatDecks)
 }
 
 export function saveDeckTitle(title) {

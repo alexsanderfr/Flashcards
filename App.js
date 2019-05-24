@@ -6,8 +6,8 @@ import reducer from './reducers'
 import middleware from './middleware'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
+import Deck from './components/Deck'
 import { Constants } from 'expo'
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import { clearDatabase } from './utils/api';
 
@@ -25,28 +25,18 @@ let TabNavigator = createBottomTabNavigator({
 });
 
 let StackNavigator = createStackNavigator({
-  Home: TabNavigator
+  Home: { screen: TabNavigator},
+  Deck: { screen: Deck}
 });
 
-let Navigation = createAppContainer(TabNavigator);
+let Navigation = createAppContainer(StackNavigator);
 
 export default class App extends React.Component {
   render() {
-    clearDatabase()
     return (
       <Provider store={createStore(reducer, middleware)}>
-        <TranslucentStatusBar/>
         <Navigation />
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
