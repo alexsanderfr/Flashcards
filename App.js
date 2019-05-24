@@ -7,8 +7,10 @@ import middleware from './middleware'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import { Constants } from 'expo'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 
-function TranslucentStatusBar ({backgroundColor, ...props}) {
+function TranslucentStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -16,15 +18,23 @@ function TranslucentStatusBar ({backgroundColor, ...props}) {
   )
 }
 
+let TabNavigator = createBottomTabNavigator({
+  Decks: { screen: DeckList },
+  Add: { screen: AddDeck },
+});
+
+let StackNavigator = createStackNavigator({
+  Home: TabNavigator
+});
+
+let Navigation = createAppContainer(TabNavigator);
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>
-        <View style={styles.container}>
-          <TranslucentStatusBar/>
-          <DeckList />
-        </View>
+        <TranslucentStatusBar/>
+        <Navigation />
       </Provider>
     );
   }
