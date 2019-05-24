@@ -20,7 +20,7 @@ class DeckList extends Component {
 
 
     render() {
-        const decks = objectToArray(this.props)
+        const decks = objectToArray(this.props.decks)
 
         const { ready } = this.state
 
@@ -29,12 +29,14 @@ class DeckList extends Component {
             return <AppLoading />
         }
 
+        console.log(decks)
         return (
             <View>
                 <Text>Deck List</Text>
                 {decks.map((deck) => (
-                    <View>
-                        <Text>Deck</Text>
+                    <View key={deck.title}>
+                        <Text>{deck.title}</Text>
+                        <Text>{deck.questions.length} questions</Text>
                     </View>
                 ))}
             </View>
@@ -44,7 +46,7 @@ class DeckList extends Component {
 
 function mapStateToProps(decks) {
     return {
-        decks
+        decks: decks
     }
 }
 

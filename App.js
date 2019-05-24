@@ -9,6 +9,7 @@ import AddDeck from './components/AddDeck'
 import { Constants } from 'expo'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
+import { clearDatabase } from './utils/api';
 
 function TranslucentStatusBar({ backgroundColor, ...props }) {
   return (
@@ -31,6 +32,7 @@ let Navigation = createAppContainer(TabNavigator);
 
 export default class App extends React.Component {
   render() {
+    clearDatabase()
     return (
       <Provider store={createStore(reducer, middleware)}>
         <TranslucentStatusBar/>
