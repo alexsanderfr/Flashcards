@@ -10,7 +10,8 @@ import Deck from './components/Deck'
 import { Constants } from 'expo'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import { blue, white } from './utils/colors'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
+import { seedDatabase } from './utils/api'
 
 function TranslucentStatusBar({ backgroundColor, ...props }) {
   return (
@@ -61,6 +62,7 @@ let Navigation = createAppContainer(StackNavigator);
 
 export default class App extends React.Component {
   render() {
+    seedDatabase()
     return (
       <Provider store={createStore(reducer, middleware)}>
         <Navigation />

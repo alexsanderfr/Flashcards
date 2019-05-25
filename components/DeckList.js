@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { receiveDecksAction } from '../actions'
 import { AppLoading } from 'expo'
 import { objectToArray } from '../utils/helpers'
+import { gray } from '../utils/colors'
 
 class DeckList extends Component {
     state = {
@@ -30,18 +31,18 @@ class DeckList extends Component {
         }
 
         return (
-            <View>
+            <ScrollView>
                 {decks.map((deck) => (
                     <TouchableOpacity key={deck.title} style={styles.container} onPress={() =>
                         this.props.navigation.navigate(
                             'Deck',
                             { title: deck.title }
                         )}>
-                        <Text>{deck.title}</Text>
-                        <Text>{deck.questions.length} questions</Text>
+                        <Text style={styles.title}>{deck.title}</Text>
+                        <Text style={styles.questions}>{deck.questions.length} questions</Text>
                     </TouchableOpacity>
                 ))}
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -59,11 +60,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: 40,
-        borderColor: 'gray',
+        borderColor: gray,
         borderWidth: 1,
-        borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        padding: 20,
+        borderRadius: 5,
+        padding: 40,
         margin: 20
+    },
+    title: {
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    questions: {
+        alignSelf: 'center',
+        fontSize: 14,
+        color: gray
     },
 });
 

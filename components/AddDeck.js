@@ -23,7 +23,7 @@ class AddDeck extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>What is the title of your new deck?</Text>
+                <Text style={styles.text}>What is the title of your new deck?</Text>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({ text })}
@@ -41,14 +41,19 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'center',
-        padding: 20,
-        margin: 20
+        padding: 10
+    },
+    text: {
+        alignSelf: 'center',
+        fontSize: 20,
     },
     textInput: {
         height: 40,
+        width: 300,
+        marginTop: 10,
+        padding: 5,
         borderRadius: 5,
         borderColor: 'gray',
         borderWidth: 1
