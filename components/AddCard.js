@@ -1,31 +1,44 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { saveDeckTitle } from '../utils/api'
-import { saveDeckTitleAction } from '../actions'
+import { addCardToDeck } from '../utils/api'
+import { addCardToDeckAction } from '../actions'
 import { blue, white } from '../utils/colors'
 
-class AddDeck extends Component {
+class AddCard extends Component {
     state = {
-        text: '',
+        question: '',
+        answer: '',
     }
-    onSend() {
-        const { text } = this.state
-        const { dispatch } = this.props
 
-        saveDeckTitle(text)
-            .then(dispatch(saveDeckTitleAction(text)))
-            .then(() => this.setState(() => ({ text: '' })))
+    onSend() {
+        const { question, answer } = this.state
+        const { dispatch, title } = this.props
+
+        card = {
+            question: question, 
+            answer: answer
+        }
+
+        addCardToDeck(title, card)
+        .then(dispatch(addCardToDeckAction(title, card)))
+        .then(() => this.setState(() => ({ question: '', answer: '' })))
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>What is the title of your new deck?</Text>
+                <Text style={styles.text}>What is the question?</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={(text) => this.setState({ text })}
-                    value={this.state.text}
+                    onChangeText={(question) => this.setState({ question })}
+                    value={this.state.question}
+                />
+                <Text style={styles.text}>What is the answer?</Text>
+                <TextInput
+                    style={styles.textInput}
+                    onChangeText={(answer) => this.setState({ answer })}
+                    value={this.state.answer}
                 />
                 <TouchableOpacity style={styles.button} onPress={this.onSend.bind(this)}>
                     <Text style={styles.buttonText}>Send</Text>
@@ -33,6 +46,14 @@ class AddDeck extends Component {
 
             </View>
         )
+    }
+}
+
+function mapStateToProps(decks, { navigation }) {
+    const { title } = navigation.state.params
+    return {
+        title: title,
+        deck: decks[title]
     }
 }
 
@@ -69,10 +90,5 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps(decks) {
-    return {
-        decks
-    }
-}
 
-export default connect(mapStateToProps)(AddDeck)
+export default connect(mapStateToProps)(AddCard)
