@@ -9,7 +9,8 @@ import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import { Constants } from 'expo'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
-import { clearDatabase } from './utils/api';
+import { blue, white } from './utils/colors'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 function TranslucentStatusBar({ backgroundColor, ...props }) {
   return (
@@ -20,13 +21,40 @@ function TranslucentStatusBar({ backgroundColor, ...props }) {
 }
 
 let TabNavigator = createBottomTabNavigator({
-  Decks: { screen: DeckList },
-  Add: { screen: AddDeck },
+  Decks: {
+    screen: DeckList, navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='home' size={30} color={tintColor} />
+    }
+  },
+  Add: {
+    screen: AddDeck, navigationOptions: {
+      tabBarLabel: 'Add Deck',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    }
+  }
 });
 
 let StackNavigator = createStackNavigator({
-  Home: { screen: TabNavigator},
-  Deck: { screen: Deck}
+  Home: {
+    screen: TabNavigator, navigationOptions: {
+      headerTintColor: white,
+      title: "Home",
+      headerStyle: {
+        backgroundColor: blue,
+      }
+    }
+  },
+
+  Deck: {
+    screen: Deck, navigationOptions: {
+      headerTintColor: white,
+      title: "Deck",
+      headerStyle: {
+        backgroundColor: blue,
+      }
+    }
+  }
 });
 
 let Navigation = createAppContainer(StackNavigator);

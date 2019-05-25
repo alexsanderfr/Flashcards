@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { saveDeckTitle, getDeck, getDecks } from '../utils/api'
+import { saveDeckTitle, getDecks } from '../utils/api'
 import { saveDeckTitleAction } from '../actions'
+import { blue, white } from '../utils/colors'
+
 class AddDeck extends Component {
     state = {
         text: '',
@@ -20,21 +22,49 @@ class AddDeck extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>What is the title of your new deck?</Text>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    style={styles.textInput}
                     onChangeText={(text) => this.setState({ text })}
                     value={this.state.text}
                 />
-                <TouchableOpacity onPress={this.onSend.bind(this)}>
-                    <Text>Send</Text>
+                <TouchableOpacity style={styles.button} onPress={this.onSend.bind(this)}>
+                    <Text style={styles.buttonText}>Send</Text>
                 </TouchableOpacity>
 
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20,
+        margin: 20
+    },
+    textInput: {
+        height: 40,
+        borderRadius: 5,
+        borderColor: 'gray',
+        borderWidth: 1
+    },
+    button: {
+        padding: 10,
+        backgroundColor: blue,
+        alignSelf: 'center',
+        borderRadius: 5,
+        margin: 20,
+    },
+    buttonText: {
+        color: white,
+        fontSize: 20,
+    }
+});
 
 function mapStateToProps(decks) {
     return {
