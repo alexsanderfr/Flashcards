@@ -33,7 +33,7 @@ class DeckList extends Component {
         return (
             <ScrollView>
                 {decks.map((deck) => (
-                    <TouchableOpacity key={deck.title} style={styles.container} onPress={() =>
+                    <TouchableOpacity key={deck.title} style={styles.item} onPress={() =>
                         this.props.navigation.navigate(
                             'Deck',
                             { title: deck.title }
@@ -54,7 +54,7 @@ function mapStateToProps(decks) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    item: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         padding: 40,
-        margin: 20
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20
     },
     title: {
         alignSelf: 'center',

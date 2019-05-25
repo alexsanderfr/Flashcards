@@ -8,6 +8,7 @@ import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 import { Constants } from 'expo'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import { blue, white } from './utils/colors'
@@ -47,7 +48,6 @@ let StackNavigator = createStackNavigator({
       }
     }
   },
-
   Deck: {
     screen: Deck, navigationOptions: {
       headerTintColor: white,
@@ -61,6 +61,15 @@ let StackNavigator = createStackNavigator({
     screen: AddCard, navigationOptions: {
       headerTintColor: white,
       title: "AddCard",
+      headerStyle: {
+        backgroundColor: blue,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz, navigationOptions: {
+      headerTintColor: white,
+      title: "Quiz",
       headerStyle: {
         backgroundColor: blue,
       }
