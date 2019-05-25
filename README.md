@@ -1,6 +1,9 @@
 # Flashcards
 This is the Flashcards app for Udacity's React Developer Nanodegree
 
+# Testing
+This app was tested in an Android Device
+
 ### Prerequisites
 
 * [Node.js](https://nodejs.org)
