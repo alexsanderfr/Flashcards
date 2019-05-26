@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(_, { navigation }) {
     const { deck } = navigation.state.params
     return {
-        deck: deck
+        deck
     }
 }
 

@@ -49,11 +49,10 @@ class AddCard extends Component {
     }
 }
 
-function mapStateToProps(decks, { navigation }) {
+function mapStateToProps(_, { navigation }) {
     const { title } = navigation.state.params
     return {
-        title: title,
-        deck: decks[title]
+        title
     }
 }
 

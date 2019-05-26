@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { receiveDecksAction } from '../actions'
@@ -36,7 +36,7 @@ class DeckList extends Component {
                     <TouchableOpacity key={deck.title} style={styles.item} onPress={() =>
                         this.props.navigation.navigate(
                             'Deck',
-                            { title: deck.title }
+                            { deck: deck }
                         )}>
                         <Text style={styles.title}>{deck.title}</Text>
                         <Text style={styles.questions}>{deck.questions.length} questions</Text>
@@ -49,7 +49,7 @@ class DeckList extends Component {
 
 function mapStateToProps(decks) {
     return {
-        decks: decks
+        decks
     }
 }
 
