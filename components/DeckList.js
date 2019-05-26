@@ -15,9 +15,9 @@ class DeckList extends Component {
 
     constructor(props) {
         super(props);
-    
-        this.onDeck = this.onDeck.bind(this);
-      }
+
+        this.onDeck = this.onDeck.bind(this)
+    }
 
     componentDidMount() {
         const { dispatch } = this.props
@@ -40,6 +40,7 @@ class DeckList extends Component {
             { deck: deck }
         )
     }
+
 
 
     render() {
