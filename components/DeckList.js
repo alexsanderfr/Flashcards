@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { receiveDecksAction } from '../actions'
@@ -10,20 +10,42 @@ import { gray } from '../utils/colors'
 class DeckList extends Component {
     state = {
         ready: false,
+        bounceValue: new Animated.Value(1)
     }
+
+    constructor(props) {
+        super(props);
+    
+        this.onDeck = this.onDeck.bind(this);
+      }
 
     componentDidMount() {
         const { dispatch } = this.props
+
         getDecks()
             .then((decks) => dispatch(receiveDecksAction(decks)))
             .then(() => this.setState(() => ({ ready: true })))
+    }
+
+    onDeck(deck) {
+        const bounceValue = this.state.bounceValue
+
+        Animated.sequence([
+            Animated.timing(bounceValue, { duration: 200, toValue: 1.2 }),
+            Animated.spring(bounceValue, { toValue: 1, friction: 4 })
+        ]).start()
+
+        this.props.navigation.navigate(
+            'Deck',
+            { deck: deck }
+        )
     }
 
 
     render() {
         const decks = objectToArray(this.props.decks)
 
-        const { ready } = this.state
+        const { ready, bounceValue } = this.state
 
 
         if (ready === false) {
@@ -33,14 +55,12 @@ class DeckList extends Component {
         return (
             <ScrollView>
                 {decks.map((deck) => (
-                    <TouchableOpacity key={deck.title} style={styles.item} onPress={() =>
-                        this.props.navigation.navigate(
-                            'Deck',
-                            { deck: deck }
-                        )}>
-                        <Text style={styles.title}>{deck.title}</Text>
-                        <Text style={styles.questions}>{deck.questions.length} questions</Text>
-                    </TouchableOpacity>
+                    <Animated.View key={deck.title} style={{ transform: [{ scale: bounceValue }] }}>
+                        <TouchableOpacity key={deck.title} style={styles.item} onPress={() => this.onDeck(deck)}>
+                            <Text style={styles.title}>{deck.title}</Text>
+                            <Text style={styles.questions}>{deck.questions.length} questions</Text>
+                        </TouchableOpacity>
+                    </Animated.View>
                 ))}
             </ScrollView>
         )

@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { gray, blue, white } from '../utils/colors'
 
 class Deck extends Component {
 
+    state = {
+        bounceValue: new Animated.Value(1),
+    }
+
+    componentDidMount() {
+        const bounceValue = this.state.bounceValue
+
+        Animated.sequence([
+            Animated.timing(bounceValue, { duration: 200, toValue: 1.2 }),
+            Animated.spring(bounceValue, { toValue: 1, friction: 4 })
+        ]).start()
+    }
+
     render() {
         const deck = this.props.deck
+        const bounceValue = this.state.bounceValue
 
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{deck.title}</Text>
-                <Text style={styles.questions}>{deck.questions.length} questions</Text>
+                <Animated.Text style={[styles.title, {transform: [{scale: bounceValue}]}]}>{deck.title}</Animated.Text>
+                <Animated.Text style={[styles.questions, {transform: [{scale: bounceValue}]}]}>{deck.questions.length} questions</Animated.Text>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={() =>
                         this.props.navigation.navigate(
