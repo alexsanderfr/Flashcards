@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { saveDeckTitle } from '../utils/api'
+import { saveDeckTitle, getDecks } from '../utils/api'
 import { saveDeckTitleAction } from '../actions'
 import { blue, white } from '../utils/colors'
 
@@ -12,13 +12,20 @@ class AddDeck extends Component {
     onSend() {
         const { text } = this.state
         const { dispatch } = this.props
+        const decks = this.props.decks
+        const deck = decks[text]
 
         saveDeckTitle(text)
             .then(dispatch(saveDeckTitleAction(text)))
             .then(() => this.setState(() => ({ text: '' })))
+            .then(getDecks().then((result) => this.props.navigation.navigate(
+                'Deck',
+                { deck: result[text] }
+            )))
     }
 
     render() {
+
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>What is the title of your new deck?</Text>

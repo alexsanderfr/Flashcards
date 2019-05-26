@@ -11,7 +11,6 @@ import Quiz from './components/Quiz'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import { blue, white } from './utils/colors'
 import { FontAwesome } from '@expo/vector-icons'
-import { seedDatabase } from './utils/api'
 import { setLocalNotification } from './utils/helpers'
 
 let TabNavigator = createBottomTabNavigator({
@@ -73,7 +72,6 @@ let Navigation = createAppContainer(StackNavigator);
 export default class App extends React.Component {
   componentDidMount() {
     setLocalNotification()
-    seedDatabase()
   }
 
   render() {

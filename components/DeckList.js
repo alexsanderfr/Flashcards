@@ -5,7 +5,7 @@ import { getDecks } from '../utils/api'
 import { receiveDecksAction } from '../actions'
 import { AppLoading } from 'expo'
 import { objectToArray } from '../utils/helpers'
-import { gray } from '../utils/colors'
+import { gray, black } from '../utils/colors'
 
 class DeckList extends Component {
     state = {
@@ -77,7 +77,6 @@ function mapStateToProps(decks) {
 const styles = StyleSheet.create({
     item: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         height: 40,
@@ -92,7 +91,8 @@ const styles = StyleSheet.create({
     title: {
         alignSelf: 'center',
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: black
     },
     questions: {
         alignSelf: 'center',
