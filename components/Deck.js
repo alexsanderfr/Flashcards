@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { gray, blue, white } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Deck extends Component {
 
@@ -24,8 +25,8 @@ class Deck extends Component {
 
         return (
             <View style={styles.container}>
-                <Animated.Text style={[styles.title, {transform: [{scale: bounceValue}]}]}>{deck.title}</Animated.Text>
-                <Animated.Text style={[styles.questions, {transform: [{scale: bounceValue}]}]}>{deck.questions.length} questions</Animated.Text>
+                <Animated.Text style={[styles.title, { transform: [{ scale: bounceValue }] }]}>{deck.title}</Animated.Text>
+                <Animated.Text style={[styles.questions, { transform: [{ scale: bounceValue }] }]}>{deck.questions.length} questions</Animated.Text>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={() =>
                         this.props.navigation.navigate(
@@ -34,11 +35,13 @@ class Deck extends Component {
                         )}>
                         <Text style={styles.buttonText}>Add Card</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() =>
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        clearLocalNotification().then(setLocalNotification)
                         this.props.navigation.navigate(
                             'Quiz',
                             { deck: deck }
-                        )}>
+                        )
+                    }}>
                         <Text style={styles.buttonText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
