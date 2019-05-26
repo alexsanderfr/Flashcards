@@ -14,7 +14,7 @@ class DeckList extends Component {
     }
 
     constructor(props) {
-        super(props);
+        super(props)
 
         this.onDeck = this.onDeck.bind(this)
     }
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: gray
     },
-});
+})
 
 
 export default connect(mapStateToProps)(DeckList)

@@ -5,7 +5,7 @@ import { red, white } from '../utils/colors'
 class Card extends Component {
 
     render() {
-        const {card, showAnswer} = this.props
+        const { card, showAnswer } = this.props
 
         return (
             <View>
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 20,
     }
-});
+})
 
 export default Card

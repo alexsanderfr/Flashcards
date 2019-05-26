@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { addCardToDeck } from '../utils/api'
 import { addCardToDeckAction } from '../actions'
@@ -16,13 +16,13 @@ class AddCard extends Component {
         const { dispatch, title } = this.props
 
         card = {
-            question: question, 
+            question: question,
             answer: answer
         }
 
         addCardToDeck(title, card)
-        .then(dispatch(addCardToDeckAction(title, card)))
-        .then(() => this.setState(() => ({ question: '', answer: '' })))
+            .then(dispatch(addCardToDeckAction(title, card)))
+            .then(() => this.setState(() => ({ question: '', answer: '' })))
     }
 
     render() {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 20,
     }
-});
+})
 
 
 export default connect(mapStateToProps)(AddCard)

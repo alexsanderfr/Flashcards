@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 20,
     }
-});
+})
 
 function mapStateToProps(decks) {
     return {

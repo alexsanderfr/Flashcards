@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 20,
     }
-});
+})
 
 function mapStateToProps(_, { navigation }) {
     const { deck } = navigation.state.params
