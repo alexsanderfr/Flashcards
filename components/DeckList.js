@@ -27,7 +27,7 @@ class DeckList extends Component {
             .then(() => this.setState(() => ({ ready: true })))
     }
 
-    onDeck(deck) {
+    onDeck(title) {
         const bounceValue = this.state.bounceValue
 
         Animated.sequence([
@@ -37,7 +37,7 @@ class DeckList extends Component {
 
         this.props.navigation.navigate(
             'Deck',
-            { deck: deck }
+            { title: title }
         )
     }
 
@@ -57,7 +57,7 @@ class DeckList extends Component {
             <ScrollView>
                 {decks.map((deck) => (
                     <Animated.View key={deck.title} style={{ transform: [{ scale: bounceValue }] }}>
-                        <TouchableOpacity key={deck.title} style={styles.item} onPress={() => this.onDeck(deck)}>
+                        <TouchableOpacity key={deck.title} style={styles.item} onPress={() => this.onDeck(deck.title)}>
                             <Text style={styles.title}>{deck.title}</Text>
                             <Text style={styles.questions}>{deck.questions.length} questions</Text>
                         </TouchableOpacity>

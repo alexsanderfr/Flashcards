@@ -2,21 +2,26 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { gray, blue, white } from '../utils/colors'
+import { getDecks } from '../utils/api'
+import { receiveDecksAction } from '../actions'
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Deck extends Component {
 
     state = {
-        bounceValue: new Animated.Value(1),
+        bounceValue: new Animated.Value(1)
     }
 
     componentDidMount() {
         const bounceValue = this.state.bounceValue
+        const { dispatch } = this.props
 
         Animated.sequence([
             Animated.timing(bounceValue, { duration: 200, toValue: 1.2 }),
             Animated.spring(bounceValue, { toValue: 1, friction: 4 })
         ]).start()
+
+        getDecks().then((decks) => dispatch(receiveDecksAction(decks)))
     }
 
     render() {
@@ -28,7 +33,7 @@ class Deck extends Component {
                 <Animated.Text style={[styles.title, { transform: [{ scale: bounceValue }] }]}>{deck.title}</Animated.Text>
                 <Animated.Text style={[styles.questions, { transform: [{ scale: bounceValue }] }]}>{deck.questions.length} questions</Animated.Text>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() =>
+                    <TouchableOpacity style={styles.button} onPress={() => 
                         this.props.navigation.navigate(
                             'AddCard',
                             { title: deck.title }
@@ -51,10 +56,10 @@ class Deck extends Component {
     }
 }
 
-function mapStateToProps(_, { navigation }) {
-    const { deck } = navigation.state.params
+function mapStateToProps(decks, { navigation }) {
+    const { title } = navigation.state.params
     return {
-        deck,
+        deck: decks[title],
     }
 }
 
