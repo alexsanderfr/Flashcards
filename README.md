@@ -8,7 +8,7 @@ This app was tested in an Android Device
 
 * [Node.js](https://nodejs.org)
 * [npm](https://www.npmjs.com/)
-* [Expo] (https://expo.io/)
+* [Expo](https://expo.io/)
 
 ### Running app
 
