@@ -8,12 +8,13 @@ This app was tested in an Android Device
 
 * [Node.js](https://nodejs.org)
 * [npm](https://www.npmjs.com/)
+* [Expo] (https://expo.io/)
 
 ### Running app
 
 ```
 * Install all project dependencies with `npm install`
-* Start the development server with `npm start`
+* Start the development server with `expo start`
 ```
 
 ## Authors
