@@ -1,5 +1,5 @@
 # Flashcards
-This is the Flashcards app for Udacity's React Developer Nanodegree
+App for studying with flashcards
 
 ### Testing
 This app was tested in an Android Device
